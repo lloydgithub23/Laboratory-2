@@ -9,7 +9,6 @@ const authRoutes = require('./routes/auth'); // Adjust path if necessary
 const profileRoutes = require('./routes/profile'); // Adjust path if necessary
 const mysql = require('mysql');
 require('dotenv').config(); // Load environment variables
-
 const app = express();
 
 // Database connection
@@ -54,13 +53,19 @@ app.use('/profile', profileRoutes); // Ensure this line is present
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Catch-all route for serving the AngularJS application
+// Default route
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`Server running at http://localhost:3000/${PORT}`);
+});
+
+// Logging middleware to help diagnose request issues
+app.use((req, res, next) => {
+    console.log(`Request URL: ${req.url}`);
+    next();
 });
