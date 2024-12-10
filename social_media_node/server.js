@@ -61,7 +61,7 @@ app.get('*', (req, res) => {
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:3000/${PORT}`);
+    console.log(`Server running at http://localhost:${PORT}/social_media_node/public/`);
 });
 
 // Logging middleware to help diagnose request issues

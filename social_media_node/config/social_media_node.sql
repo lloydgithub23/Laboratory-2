@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `social_media_app`
+-- Database: `social_media_node`
 --
-CREATE DATABASE IF NOT EXISTS `social_media_app` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `social_media_app`;
+CREATE DATABASE IF NOT EXISTS `social_media_node` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `social_media_node`;
 
 -- --------------------------------------------------------
 

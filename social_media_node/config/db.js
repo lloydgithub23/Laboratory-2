@@ -4,7 +4,7 @@ const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'social_media_app'
+    database: 'social_media_node'
 });
 
 db.connect((err) => {
