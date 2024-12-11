@@ -2,20 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="login.css"> <!-- Assuming you have a styles.css for styling -->
+    <title>Login - Social Media App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <div class="login-container">
+<body ng-app="socialMediaApp">
+    <div ng-controller="LoginController">
         <h1>Login</h1>
-        <form action="/auth/login" method="POST">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+        <form ng-submit="login()">
+            <input type="text" ng-model="username" placeholder="Username" required><br>
+            <input type="password" ng-model="password" placeholder="Password" required><br>
             <button type="submit">Login</button>
         </form>
+        <p style="color: red;" ng-if="errorMessage">{{ errorMessage }}</p>
+        <p>Don't have an account? <a href="/register">Register here</a></p>
     </div>
+
+    <script>
+        var app = angular.module('socialMediaApp', []);
+        app.controller('LoginController', function($scope, $http, $window) {
+            $scope.errorMessage = '';
+
+            $scope.login = function() {
+                const userData = {
+                    username: $scope.username,
+                    password: $scope.password
+                };
+
+                $http.post('/login', userData)
+                    .then(function(response) {
+                        // Clear any previous error message
+                        $scope.errorMessage = '';
+                        $window.location.href = '/';
+                    }, function(error) {
+                        // Set the error message to show it on the page
+                        $scope.errorMessage = 'Invalid credentials. Please try again.';
+                    });
+            };
+        });
+    </script>
 </body>
 </html>
